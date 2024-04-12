@@ -60,3 +60,23 @@ function generateAndStoreToken(req, opts) {
     })
     return token
 }
+
+//Success in Auth
+function authSuccess(req, res) {
+    const token = generateAndStoreToken(req)
+
+    res.writeHead(200, {
+        'content-type': 'text/html',
+        'authorization': token
+    })
+    return res.send(restricted)
+}
+
+//Lookup a person in the database 
+let person = {un: username, pw: 'password'}
+
+//Not Found Page
+function notFound(res) {
+    res.writeHead(404, {'content-type': 'text/plain'})
+    return res.end(index)
+}
