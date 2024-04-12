@@ -1,4 +1,4 @@
-let port = process.env.PORT // Let my public sever define the port
+let port = process.env.PORT || 3000 // Let my public sever define the port
 const http = require('http') // Core node.js http
 const url = require('url') // Core node.js URL
 const app = require('./lib/helpers') // Auth token verification and render helpers
