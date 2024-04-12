@@ -24,9 +24,21 @@ function authFail(res, callback) {
     return res.end(notFound)
 }
 
+//Generate a global unique identifier (GUID)
+function generateGUID() {
+    return new Date().getTime()
+}
+
 //Create a JWT
-function generateToken(req) {
+function generateToken(req, GUID, opts) {
     //By default it will expire the token afte 7 days
     //The value of expire(exp) needs to be in seconds
-    
+    opts = opts || {}
+
+    let expireDefault = '7d'
+
+    const token = jwt.sign({
+        auth: GUID,
+        agent: req.headers['user-agent']
+    }, secret, {expiresIn: opts.expires || expireDefault})
 }
